@@ -11,10 +11,10 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'gu-fan/require.vim'
-so ~/.vim/plugged/require.vim/plugin/require.vim
+exec "so ".  g:path.plug. "require.vim/plugin/require.vim"
 
 Plug 'gu-fan/os.vim'
-so ~/.vim/plugged/os.vim/plugin/os.vim
+exec "so ".  g:path.plug. "os.vim/plugin/os.vim"
 
 Plug 'rykka/debug.vim'
 
@@ -25,6 +25,7 @@ Require package/search
 Require package/complete
 
 Require package/document
+Require package/shell
 
 Require package/filetype/html
 
@@ -37,7 +38,6 @@ Require package/mapping
 
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'vim-airline/vim-airline'
-
 
 
 Require package/file

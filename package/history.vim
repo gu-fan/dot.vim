@@ -36,7 +36,7 @@ endfun
 
 
 fun! s:restart()
-    Save
+      execute 'wa'
     call system('gvim -c "Load"')
     quitall
 endfun
@@ -44,3 +44,7 @@ endfun
 com! -nargs=? Save call s:save_session(<q-args>)
 com! -nargs=? Load call s:load_session(<q-args>)
 com! -nargs=0 Restart :call s:restart()
+
+cabbrev save Save
+cabbrev load Load
+cabbrev restart Restart

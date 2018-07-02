@@ -5,6 +5,8 @@ aug au_basic
 
     " to the line when file last opened
     au BufReadPost * if line("'\"") && line("'\"") <= line("$") | exe  "normal! g`\"" | endif
+    au CompleteDone * if pumvisible() == 0 | pclose | endif
+    autocmd QuickFixCmdPost * botright copen 8
 
 aug END
 

@@ -6,8 +6,8 @@ com! Trim call Trim()
 cabbrev ss so %
 cabbrev E e
 cabbrev dir Dir
-cabbrev save Save
-cabbrev load Load
+cabbrev trim Trim
+cabbrev copy Copy
 
 function! Trim()
     sil! %s#\s\+$##g

@@ -1,6 +1,7 @@
 
 Plug 'chemzqm/wxapp.vim'
 Plug 'wavded/vim-stylus'
+Plug 'groenewege/vim-less'
 
 Plug 'jparise/vim-graphql'
 " Plug 'leafgarland/typescript-vim'
