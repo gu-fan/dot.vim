@@ -111,4 +111,21 @@ License
 ~~~~~~~
 
 Use it by your own.
+=======
+
+    echo "so ~/.dot.vim/index.vim" > ~/.vimrc
+
+
+start vim , after curl get ``plug.vim``
+
+    use ``PlugInstall`` to install all plugins
+
+
+
+Usage
+~~~~~
+
+
+This is my vim config file, but you can use it as a start place for your own configuration
+
 
