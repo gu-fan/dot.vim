@@ -18,8 +18,29 @@ exec "so ".  g:path.plug. "os.vim/plugin/os.vim"
 
 Plug 'rykka/debug.vim'
 
-Require package/ui
 
+Require config/editor
+
+Require config/autocmd
+Require config/statusline
+Require config/command
+Require config/mapping
+Require config/folding
+Require config/history
+Require config/search
+
+
+
+
+if os.is_windows
+    Require config/mswin
+endif
+
+
+
+
+
+Require package/ui
 Require package/history
 Require package/search
 Require package/complete
@@ -47,3 +68,4 @@ Require package/git
 
 call plug#end()
 
+Require config/ui

@@ -2,10 +2,9 @@ Plug 'tpope/vim-fugitive'
 
 nnoremap <Leader>gp :AsyncRun git push<CR>
 nnoremap <Leader>gP :AsyncRun git pull<CR>
-nnoremap <Leader>gc :Gcommit -a<CR>
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gca :Gcommit -a<CR>
+nnoremap <leader>gc :Gcommit -a<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gb :Gblame<CR>
 
 Plug 'airblade/vim-gitgutter'
 Plug 'skywind3000/asyncrun.vim'

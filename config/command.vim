@@ -9,6 +9,8 @@ cabbrev dir Dir
 cabbrev trim Trim
 cabbrev copy Copy
 
+
+
 function! Trim()
     sil! %s#\s\+$##g
     w!

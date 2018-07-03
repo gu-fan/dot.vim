@@ -128,4 +128,3 @@ Usage
 
 This is my vim config file, but you can use it as a start place for your own configuration
 
-

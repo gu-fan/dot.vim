@@ -48,8 +48,6 @@ endfunction "}}}
 let s:k = require.at('search', expand('<sfile>:p'))
 " Require search
 
-
-
 vno   /    <ESC>/<C-\>e<SID>p(<SID>r(),"e")<CR>
 vno   ?    <ESC>?<C-\>e<SID>p(<SID>r(),"e")<CR>
 vno   #    <ESC>/<C-\>e<SID>p(<SID>r(),"e")<CR><CR><C-G>
@@ -100,7 +98,7 @@ com! -nargs=0 Term call <SID>terminal()
 
 nor   <F7>   :GundoToggle<CR>
 nor   <F8>   :Dir<CR>
-nor   <F9>   :Term<CR>
+nor   <F6>   :Shell<CR>
 
 function! s:toggle_nerdfind() "{{{
     if exists("t:nerdwin") && t:nerdwin==1

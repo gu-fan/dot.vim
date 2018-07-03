@@ -41,10 +41,11 @@ nno   k   gk
 vno   j  gj
 vno   k  gk
 
-nno   <leader>   <Nop>
-vno   <leader>   <Nop>
+" nno   <leader>   <Nop>
+" vno   <leader>   <Nop>
 nno   s          <Nop>
 nno   S          <Nop>
+nno   c          <Nop>
 nno   Q          <Nop>
 " similar with D
 " nno   yy         "*yy

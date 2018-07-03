@@ -16,12 +16,13 @@ let g:airline_theme='base16_grayscale'
 
 if !exists('s:ui_loaded')
     let s:ui_loaded = 1
-    if filereadable(galaxy_path)
+    if filereadable(galaxy_path) 
+        exe "source " .galaxy_path
         colorscheme galaxy
-        set t_Co=256                   " 256 colors for the terminal
+        set t_Co=256                   " 256 colors for terminal
     else
         set background=dark            " set a dark background
-        colorscheme desert
+        colorscheme slate
     endif
 
 
@@ -55,6 +56,8 @@ if !exists('s:ui_loaded')
 
     set winheight=3
     set winminheight=0
+    set noequalalways
+
     " set formatoptions=qrn1ct
     set textwidth=0
     set cc=81
@@ -66,12 +69,9 @@ if !exists('s:ui_loaded')
 
 
     " shell
-    if has('unix')
-        set shell=/bin/sh
-    endif
-    set title                       " set the terminal title to the current file
-    set ttyfast                     " better screen redraw
-    set visualbell                  " turn on the visual bell
+    " if has('unix')
+    "     set shell=/bin/sh
+    " endif
 
     " command line
     set wildmenu                        " Command line autocompletion
