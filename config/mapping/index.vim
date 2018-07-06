@@ -1,3 +1,3 @@
-Require basic
-Require function
-Require pair
+Require 'basic'
+Require 'function'
+Require 'pair'

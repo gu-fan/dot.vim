@@ -1,3 +1,3 @@
-Require basic
-Require vimrc
-Require filetype
+Require 'basic'
+Require 'vimrc'
+Require 'filetype'

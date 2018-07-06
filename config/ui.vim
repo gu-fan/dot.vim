@@ -73,6 +73,10 @@ if !exists('s:ui_loaded')
     "     set shell=/bin/sh
     " endif
 
+    " set title                       " set the terminal title to the current file
+    " set ttyfast                     " better screen redraw
+    " set visualbell                  " turn on the visual bell
+
     " command line
     set wildmenu                        " Command line autocompletion
     " set wildmode=list:longest,full      " Shows all the options

@@ -19,53 +19,53 @@ exec "so ".  g:path.plug. "os.vim/plugin/os.vim"
 Plug 'rykka/debug.vim'
 
 
-Require config/editor
+Require 'config/editor'
 
-Require config/autocmd
-Require config/statusline
-Require config/command
-Require config/mapping
-Require config/folding
-Require config/history
-Require config/search
+Require 'config/autocmd'
+Require 'config/statusline'
+Require 'config/command'
+Require 'config/mapping'
+Require 'config/folding'
+Require 'config/history'
+Require 'config/search'
 
 
 
 
 if os.is_windows
-    Require config/mswin
+    Require 'config/mswin'
 endif
 
 
 
 
 
-Require package/ui
-Require package/history
-Require package/search
-Require package/complete
+Require 'package/ui'
+Require 'package/history'
+Require 'package/search'
+Require 'package/complete'
 
-Require package/document
-Require package/shell
+Require 'package/document'
+Require 'package/shell'
 
-Require package/filetype/html
+Require 'package/filetype/html'
 
 " Plug 'rykka/jass.vim'
 " Plug 'rykka/mathematic.vim'
 " Plug 'rykka/zendjango.vim'
 
-Require package/mapping
+Require 'package/mapping'
 
 
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'vim-airline/vim-airline'
 
 
-Require package/file
-Require package/git
+Require 'package/file'
+Require 'package/git'
 
 
 
 call plug#end()
 
-Require config/ui
+Require 'config/ui'
