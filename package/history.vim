@@ -8,7 +8,7 @@ Plug 'rykka/lastbuf.vim'
 " save/load last workspace
 Plug 'tpope/vim-obsession'
 
-set ssop=blank,curdir,help,options,resize,tabpages,winpos,winsize
+set ssop=blank,curdir,help,resize,tabpages,winpos,winsize
 
 let _p = expand('~/.vim/session')
 if !isdirectory(_p)
@@ -16,9 +16,8 @@ if !isdirectory(_p)
 endif
 
 
-
 fun! s:save_session(ses)
-    if a:ses
+    if a:ses != ''
         exe 'Obsession ~/.vim/session/' . a:ses
     else
         Obsession ~/.vim/session/default.vim
@@ -26,24 +25,28 @@ fun! s:save_session(ses)
 endfun
 
 fun! s:load_session(ses)
-    if a:ses
+    if a:ses != ''
         exe 'so ~/.vim/session/' . a:ses
     else
         so ~/.vim/session/default.vim
     endif
 endfun
 
-
-
 fun! s:restart()
-      execute 'wa'
+    execute 'wa'
     call system('gvim -c "Load"')
     quitall
 endfun
 
-com! -nargs=? Save call s:save_session(<q-args>)
-com! -nargs=? Load call s:load_session(<q-args>)
+com! -nargs=? -complete=customlist,ListSess Save call s:save_session(<q-args>)
+com! -nargs=? -complete=customlist,ListSess Load call s:load_session(<q-args>)
 com! -nargs=0 Restart :call s:restart()
+
+func! ListSess(A,L,P)
+    let _ls  = split(globpath('~/.vim/session/', '*'), "\n")
+    let _ls = map(_ls, "fnamemodify(v:val, ':t')")
+    return _ls
+endfun
 
 cabbrev save Save
 cabbrev load Load

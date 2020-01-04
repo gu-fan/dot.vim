@@ -54,13 +54,17 @@ if !exists('s:ui_loaded')
     set ruler                       " sets a permanent rule
     set showcmd                     " shows partial commands
 
-    set winheight=3
+    set winheight=10
     set winminheight=0
     set noequalalways
 
+    set splitright
+    set splitbelow
+
     " set formatoptions=qrn1ct
     set textwidth=0
-    set cc=81
+    " set cc=81
+    set cc=
 
     " set scrolloff=7                 " buffer when scrolling
     set scrolloff=1 scrolljump=1

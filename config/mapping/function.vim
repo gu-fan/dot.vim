@@ -55,6 +55,8 @@ vno   *    <ESC>?<C-\>e<SID>p(<SID>r(),"e")<CR><CR><C-G>
 vno   n    <ESC>/<C-\>e<SID>p(<SID>r(),"e")<CR><CR><C-G>
 vno   N    <ESC>?<C-\>e<SID>p(<SID>r(),"e")<CR><CR><C-G>
 
+nno # /<C-R><C-W><CR>
+
 augroup help
     autocmd!
     au BufRead,BufNewFile *.vim set kp=
@@ -62,12 +64,15 @@ augroup help
     au FileType bash set kp=man
 augroup END
 
+
+let _search = require.at('search', expand('<sfile>:p'))
+
 nor   <F1>   K
 " nno   <s-F2> :%<C-R>=<SID>substitute(@/,"\x00")<CR><Left><Left><Left>
 " vno   <s-F2> :<C-R>=<SID>substitute(@/,"\x00")<CR><Left><Left><Left>
 " nno   <F2>   :%<C-R>=<SID>substitute(expand('<cword>'),"b")<CR><Left><Left><Left>
 " vno   <F2>   :<C-R>=<SID>substitute(expand('<cword>'),"b")<CR><Left><Left><Left>
-nno   <F2>     :%<C-R>=<SID>w(@/,"\x00")<CR><Left><Left><Left>
+nno   <F2>     :%<C-R>=_search.generate(@/,"\x00")<CR><Left><Left><Left>
 vno   <F2>     :<C-R>=<SID>w(@/,"\x00")<CR><Left><Left><Left>
 nno   <S-F2>   :%<C-R>=<SID>w(expand('<cword>'),"b")<CR><Left><Left><Left>
 vno   <S-F2>   :<C-R>=<SID>w(expand('<cword>'),"b")<CR><Left><Left><Left>
@@ -98,7 +103,8 @@ com! -nargs=0 Term call <SID>terminal()
 
 nor   <F7>   :GundoToggle<CR>
 nor   <F8>   :Dir<CR>
-nor   <F6>   :Shell<CR>
+" nor   <F6>   :Sexe yarn test<CR>
+nor   <leader>rt :Sexe yarn test<CR>
 
 function! s:toggle_nerdfind() "{{{
     if exists("t:nerdwin") && t:nerdwin==1

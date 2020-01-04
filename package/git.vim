@@ -1,10 +1,10 @@
 Plug 'tpope/vim-fugitive'
 
-nnoremap <Leader>gp :Srun git push<CR>
-nnoremap <Leader>gP :Srun git pull<CR>
-nnoremap <leader>gc :Gcommit -a -v<CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gb :Gblame<CR>
+nnore <Leader>gp :Srun git push<CR>
+nnore <Leader>gP :Srun git pull<CR>
+nnore <leader>gc :Gcommit -a -v<CR>
+nnore <leader>gs :Gstatus<CR>
+nnore <leader>gb :Gblame<CR>
 
 Plug 'airblade/vim-gitgutter'
 

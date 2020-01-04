@@ -21,7 +21,7 @@ fun! search.generate(word,mode) dict "{{{
     else
         let ss = self.escape(a:word,"search")
     endif
-    return "s/".ss."/". self.escape(rs,"replace")."/gc" 
+    return "s/".ss."/".a:word. "/gc" 
 endfunction "}}}
 
 

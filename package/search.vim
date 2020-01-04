@@ -6,3 +6,5 @@ cabbrev se Search
  
 let g:ag_working_path_mode='r'
 
+nnore <leader>ff :Ag<Space>
+

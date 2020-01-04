@@ -166,7 +166,6 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 "
 
 
-
 " neocompl cache snippets_complete
 " nmap <c-k> a<c-k><esc>
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -190,18 +189,25 @@ if has('conceal')
 endif
 let g:neosnippet#snippets_directory = "~/Dropbox/vim/my_snips/snippets_complete/"
 
-map <leader>se :sp\|NeoSnippetEdit<cr>
-map <leader>sr :sp\|NeoSnippetSource<cr>
-map <leader>s_ :sp\|e ~/Dropbox/vim/my_snips/snippets_complete/_.snip <cr>
+map <leader>pe :sp\|NeoSnippetEdit<cr>
+map <leader>pr :sp\|NeoSnippetSource<cr>
+map <leader>p_ :sp\|e ~/Dropbox/vim/my_snips/snippets_complete/_.snip <cr>
 
 " Deprecated, not good as neosnippet
 " Plug 'vim-scripts/UltiSnips'
+" Plug 'tomtom/tcomment_vim'
+" let g:tcommentMapLeaderOp1 = '<leader>c'
+" nnoremap <c-/> :TComment<cr>
+" let g:tcommentGuessFileType = 0
+" let g:tcommentGuessFileType_vue = 'html'
+"
+Plug 'tpope/vim-commentary'
 
-Plug 'tomtom/tcomment_vim'
-let g:tcommentMapLeaderOp1 = '<leader>c'
-nnoremap <c-/> :TComment<cr>
-let g:tcommentGuessFileType = 0
-let g:tcommentGuessFileType_vue = 'html'
+nno <leader>cc :Commentary<CR>
+vno <leader>cc :Commentary<CR>
+" vno <leader>c :Commentary<CR>
+vno <leader>c <Nop>
+
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-abolish'

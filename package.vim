@@ -16,7 +16,8 @@ exec "so ".  g:path.plug. "require.vim/plugin/require.vim"
 Plug 'gu-fan/os.vim'
 exec "so ".  g:path.plug. "os.vim/plugin/os.vim"
 
-Plug 'rykka/debug.vim'
+Plug 'gu-fan/debug.vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 
 Require 'config/editor'
@@ -28,6 +29,7 @@ Require 'config/mapping'
 Require 'config/folding'
 Require 'config/history'
 Require 'config/search'
+Require 'config/workspace'
 
 
 
@@ -35,7 +37,6 @@ Require 'config/search'
 if os.is_windows
     Require 'config/mswin'
 endif
-
 
 
 
@@ -64,6 +65,7 @@ Require 'package/mapping'
 Require 'package/file'
 Require 'package/git'
 
+Plug 'wakatime/vim-wakatime'
 
 
 call plug#end()

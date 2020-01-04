@@ -11,11 +11,81 @@ function! MyStatusLine()
         \. "%4*%{MyStatusGit()}%*"
         \. "%5*%{MyStatusGitChanges()}%*"
         \. " %{MyStatusTsc()} %f %{MyStatusRunningFrame()} %{MyStatusModifySymbol()}"
-        \. " %{MyStatusReadonly()}"
+        \. " %{MyStatusReadonly()} "
         \. errorMsg
-        \. "%=%-{&ft} %l,%c %P "
+        \. "%="
+        \. MyStatusFile()
+        \. " %-{&ft} %l,%c %P "
 "%{&fenc}
 endfunction
+
+
+" XXX!
+" Seems you can only get the CURRENT buffer (editing one)
+" but don't know if it's !ACTIVE / !INACTIVE while render statusline
+"
+" the g:actual_curbuf not work
+" so even a %f  or %n can not be get
+"
+"
+" NOTE: use %{} to get the exec buffer context
+fun! Echo()
+    return bufnr('%')
+endfun
+
+fun! GetGitDir()
+    let full = expand('%:p:h')
+
+    let p_len = len(split(full, '/'))
+    let parents = map(range(p_len), 'fnamemodify(full, repeat(":h" ,v:val))')
+    call map(parents, 'v:val."/.git"')
+    call filter(parents, 'isdirectory(v:val)')
+
+	if len(parents) > 0
+		let main = fnamemodify(parents[0], ':h:t')
+        return ' '. main. ' '
+    else 
+        return ''
+    endif
+    
+endfun
+
+
+
+
+fun! MyStatusFile()
+    " return '%{Echo()}'
+    " return '%n %{Echo()}'
+    " return bufnr('%')
+    " return exists("g:actual_curbuf") ? g:actual_curbuf : 'NONE'
+    return '%#MyStatusLineTitle#%{GetGitDir()}%*'
+
+
+    retrun 
+
+    let full = expand('%:p:h')
+    let name = expand('%:t')
+
+    let p_len = len(split(full, '/'))
+    let parents = map(range(p_len), 'fnamemodify(full, repeat(":h" ,v:val))')
+    call map(parents, 'v:val."/.git"')
+    call filter(parents, 'isdirectory(v:val)')
+
+	if len(parents) > 0
+		let main = fnamemodify(parents[0], ':h:t')
+		let full_fix = substitute(full, main, '#####','')
+		let trim = fnamemodify(full_fix, ':gs?\([^/#]\)[^/#]*?\1?')
+		let trim_rev = substitute(trim, '#####', '%#StatusLine#'.main.'%#StatusLineNC#','')
+		return "%#StatusLineNC#"  . trim_rev .'/%*'  . '%{Echo(%n)}'
+	else
+        return ''
+	endif
+	
+
+
+    " return "%#StatusLineNC#"  . trim.'/%*' . name
+    
+endfun
 
 function! s:IsTempFile()
   if !empty(&buftype) | return 1 | endif
@@ -119,7 +189,7 @@ function! s:SetGitStatus(root, str)
   redraws!
 endfunction
 
-function! SetStatusLine()
+function! SetStatusLine(file)
   if &previewwindow | return | endif
   if s:IsTempFile() | return | endif
   call MyStatusGit(1)
@@ -137,6 +207,21 @@ function! s:highlight()
   hi MyStatusPaste ctermfg=202   ctermbg=16    cterm=none
   hi User4 guifg=#f8f8ff guibg=#000000
   hi User5 guifg=#f8f9fa guibg=#343a40
+
+    " GET Current Color
+    try
+        let tabbgcolor=synIDattr(hlID('Tablinefill'), 'bg#')
+        let tabselbgcolor=synIDattr(hlID('TablineSel'), 'bg#')
+        let statbgcolor=synIDattr(hlID('StatusLine'), 'bg#')
+        let statfgcolor=synIDattr(hlID('StatusLine'), 'bg#')
+        "
+        exe "hi MyTablineTitle guifg=#99A8CC guibg=".tabbgcolor." gui=none"
+        exe "hi MyTablineSeLTitle guifg=#99A8CC guibg=".tabselbgcolor." gui=none"
+        exe "hi MyStatusLineTitle guifg=#99A8CC guibg=".tabbgcolor." gui=none"
+        
+    catch /E254/
+        
+    endtry
 endfunction
 
 function! MyStatusLocError()
@@ -150,8 +235,126 @@ endfunction
 
 augroup statusline
   autocmd!
-  autocmd User GitGutter call SetStatusLine()
-  autocmd BufWinEnter,ShellCmdPost,BufWritePost * call SetStatusLine()
-  autocmd FileChangedShellPost,ColorScheme * call SetStatusLine()
-  autocmd FileReadPre,ShellCmdPost,FileWritePost * call SetStatusLine()
+  autocmd User GitGutter call SetStatusLine(expand('%'))
+  autocmd BufWinEnter,ShellCmdPost,BufWritePost * call SetStatusLine(expand('%'))
+  autocmd FileChangedShellPost,ColorScheme * call SetStatusLine(expand('%'))
+  autocmd FileReadPre,ShellCmdPost,FileWritePost * call SetStatusLine(expand('%'))
 augroup end
+
+
+set tabline=%!MyTabLine()  " custom tab pages line
+function! MyTabLine()
+        let s = '' " complete tabline goes here
+        " loop through each tab page
+        for t in range(tabpagenr('$'))
+                " set highlight
+                if t + 1 == tabpagenr()
+                        let s .= '%#TabLineSel#'
+                else
+                        let s .= '%#TabLineFill#'
+                endif
+                " set the tab page number (for mouse clicks)
+                let s .= '%' . (t + 1) . 'T'
+                if t + 1 == tabpagenr()
+                    let s .= '%#MyTablineSelTitle# '
+                else
+                    let s .= '%#MyTablineTitle# '
+                endif
+                " set page number string
+                let s .= t + 1 . ''
+                let full = fnamemodify(bufname(tabpagebuflist(t + 1)[0]), ':p:h')
+                let git_full = GetGitDirFull(full)
+                let s .= git_full != '' ? ' '. git_full. '' : ''
+                let s .=  ' %*'
+                " get buffer names and statuses
+                let n = ''      "temp string for buffer names while we loop and check buftype
+                let m = 0       " &modified counter
+                let bc = len(tabpagebuflist(t + 1))     "counter to avoid last ' '
+                " loop through each buffer in a tab
+                for b in tabpagebuflist(t + 1)
+                        " buffer types: quickfix gets a [Q], help gets [H]{base fname}
+                        " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
+                        if getbufvar( b, "&buftype" ) == 'help'
+                                " let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
+                                let n .= '[H]'
+                        elseif getbufvar( b, "&buftype" ) == 'quickfix'
+                                let n .= '[Q]'
+                        else
+                                " let n .= pathshorten(bufname(b))
+                        endif
+                        " check and ++ tab's &modified count
+                        if getbufvar( b, "&modified" )
+                                let m += 1
+                        endif
+                        " no final ' ' added...formatting looks better done later
+                        if bc > 1
+                                let n .= ' '
+                        endif
+                        let bc -= 1
+                endfor
+                let p = pathshorten(bufname(tabpagebuflist(t + 1)[0]))
+
+                
+                let _l = split(p, '/')
+                if len(_l) > 4
+                    let _l = _l[-4:]
+                endif
+                let k = join(_l,'/')
+
+                let n .= ' ' .k
+
+                " add modified label [n+] where n pages in tab are modified
+                "
+                let total = len(tabpagebuflist(t + 1))
+                if m > 0
+                        let n .= '[' .total . ':' .m . '+]'
+                else
+                        if total > 1
+                            let n .= ' ['.total.']'
+                        endif
+                endif
+                " select the highlighting for the buffer names
+                " my default highlighting only underlines the active tab
+                " buffer names.
+                if t + 1 == tabpagenr()
+                        let s .= '%#TabLineSel#'
+                else
+                        " let s .= '%#TabLine#'
+                endif
+                
+                " add buffer names
+                if n == ''
+                        let s.= '[New]'
+                else
+                        let s .= n
+                endif
+                " switch to no underlining and add final space to buffer list
+                let s .= ' '
+        endfor
+        " after the last tab fill with TabLineFill and reset tab page nr
+        let s .= '%#TabLineFill#%T'
+        " right-align the label to close the current tab page
+        if tabpagenr('$') > 1
+                let s .= '%=%#TabLineFill#%999XX'
+        endif
+        return s
+endfunction
+
+fun! GetGitDirFull(full)
+    let full = a:full
+
+    let p_len = len(split(full, '/'))
+    let parents = map(range(p_len), 'fnamemodify(full, repeat(":h" ,v:val))')
+    call map(parents, 'v:val."/.git"')
+    call filter(parents, 'isdirectory(v:val)')
+
+	if len(parents) > 0
+		let main = fnamemodify(parents[0], ':h:t')
+        return main
+    else 
+        return ''
+    endif
+    
+endfun
+
+" set tabline=%!MyTabLine()

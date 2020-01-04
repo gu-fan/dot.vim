@@ -6,6 +6,8 @@ aug au_Filetypes "{{{
     au BufRead,BufNewFile tmux.conf setf tmux
     au BufRead,BufNewFile *.hbs setf mustache
     au FileType c,cpp    setl fdm=syntax
+    au BufRead,BufNewFile *.dart setl sw=2
+    au FileType dart setl sw=2
     au FileType jass     setl wrap fdm=syntax
     au FileType jass     nor <buffer> gD :call <SID>jass_goDef()<CR>
     au FileType javascript call <SID>js_fold()
@@ -34,6 +36,7 @@ aug au_Filetypes "{{{
     " CTRL P SET PATH
     au FileType javascript cal <SID>set_path()
 
+   " au BufWinEnter * if &buftype == 'terminal' | setlocal winfixheight | endif
 
 aug END "}}}
 
@@ -67,7 +70,7 @@ endfunction "}}}
 
 " JavaScript {{{2
 function! s:js_fold() "{{{
-    setl foldmethod=syntax
+    " setl foldmethod=syntax
     syn region foldBraces start=/{/ skip=#/\%([^/]\|\/\)*/\|'[^']*'\|"[^"]*"#
                 \ end=/}/ transparent fold keepend extend
 endfunction "}}}

@@ -1,7 +1,9 @@
 
 Plug 'Lokaltog/vim-easymotion'
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-map <ctrl-0> <Plug>(easymotion-prefix)
+" map <Leader> <Plug>(easymotion-prefix)
+let g:EasyMotion_do_mapping = 0
+map <Leader> <Nop>
 " Gif config
 "
 nmap f <Plug>(easymotion-s)

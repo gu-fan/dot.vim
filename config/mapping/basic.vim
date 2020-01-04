@@ -47,6 +47,12 @@ nno   s          <Nop>
 nno   S          <Nop>
 nno   c          <Nop>
 nno   Q          <Nop>
+
+
+" use x or d to delete selected
+            vno s <nop>
+            vno c <nop>
+
 " similar with D
 " nno   yy         "*yy
 nno   Y          "*y$
@@ -58,10 +64,10 @@ nno   cc        <nop>
 " vno   d          "*d
 " vno   x          "*x
 
-nno   >          >>
-nno   <          <<
-vno   >          >gv
+nno <nowait>  >          >>
+nno <nowait>  <          <<
 vno   <          <gv
+vno   >          >gv
 
 " repeat on every line
 vno   .          :normal .<CR>
@@ -74,12 +80,12 @@ ino <rightrelease><leftrelease> <c-o><c-o>
 
 " Window
 nno <silent><C-W>1 :resize<cr>
-nno <silent><C-W>2 :vert resize<cr>
-nno <silent><C-W>3 <C-W>=
+" nno <silent><C-W>2 :vert resize<cr>
+nno <silent><C-W>2 <C-W>=
 
 
-nno <silent><A-1>  :if &go=~#'m' \| set go-=m \| else \| set go+=m \| endif<CR>
-nno <silent><A-2>  :if &go=~#'e' \| set go-=e \| else \| set go+=e \| endif<CR>
+" nno <silent><A-1>  :if &go=~#'m' \| set go-=m \| else \| set go+=m \| endif<CR>
+" nno <silent><A-2>  :if &go=~#'e' \| set go-=e \| else \| set go+=e \| endif<CR>
 
 nno <C-W>n <C-W>w
 nno <C-W>N <C-W>n

@@ -1,3 +1,7 @@
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+
+Plug 'gu-fan/duonote.vim'
 
 Plug 'scrooloose/nerdtree'
 
@@ -19,12 +23,13 @@ aug END
 Plug 'kien/ctrlp.vim'
 " nmap <C-J>  :CtrlPLine<CR>
 let g:ctrlp_custom_ignore =  {
-    \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules)$'
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|dist)$',
+    \ 'file': '\v\.(exe|so|dll|meta|png|jpg|psd|asset|ttf|otf)|main\.js$',
     \ }
-let g:ctrlp_use_cache = 0
-let g:ctrlp_root_markers=['.git', 'package.json', 'package.vim']
+let g:ctrlp_use_cache = 1
+let g:ctrlp_root_markers=['.git', 'package.json', 'package.vim','.root']
 " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 
 fun! V(...)
     CtrlPMRU
@@ -35,7 +40,7 @@ endfun
 com! -nargs=* V call V(<q-args>)
 map <leader>pv  :CtrlPMRU<CR>
 map <leader>pl  :CtrlPLine<CR>
-map <leader>pp  :CtrlP<CR>
+" map <leader>pp  :CtrlP<CR>
 
 Plug 'Shougo/denite.nvim'
 
