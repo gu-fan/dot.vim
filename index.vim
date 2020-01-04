@@ -1,6 +1,6 @@
 let g:path={}
-let g:path.dot = expand('~/.dot.vim/')
-let g:path.plug = expand('~/.vim/plugged/')
+let g:path.dot = expand('/Users/gu_fan/.dot.vim/')
+let g:path.plug = expand('/Users/gu_fan/.vim/plugged/')
 
 exec "so ".  g:path.dot. "package.vim"
 
@@ -33,4 +33,4 @@ exec "so ".  g:path.dot. "package.vim"
 " ~/.config/fish/fish.config
 " ~/.config/omf/init.fish
 set mmp=100000
-cd ~/Desktop/vim/
+cd /Users/gu_fan/Desktop/
