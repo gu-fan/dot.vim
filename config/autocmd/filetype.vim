@@ -1,17 +1,18 @@
 aug au_Filetypes "{{{
     au!
     au BufRead,BufNewFile *.j,*.wct setf jass
+    au BufRead,BufNewFile *.wxs setf javascript
     au BufRead,BufNewFile *.mako    setf mako
     au BufRead,BufNewFile *.conf    setf conf
     au BufRead,BufNewFile tmux.conf setf tmux
     au BufRead,BufNewFile *.hbs setf mustache
     au FileType c,cpp    setl fdm=syntax
-    au BufRead,BufNewFile *.dart setl sw=2
-    au FileType dart setl sw=2
+    au BufRead,BufNewFile *.dart set sw=2 tabstop=2 softtabstop=2 expandtab autoindent
+    au FileType dart set sw=2 tabstop=2 softtabstop=2 expandtab autoindent
     au FileType jass     setl wrap fdm=syntax
     au FileType jass     nor <buffer> gD :call <SID>jass_goDef()<CR>
     au FileType javascript call <SID>js_fold()
-    au FileType javascript setl sw=2
+    au FileType javascript,typescript setl sw=2
     au FileType python map <buffer> <F1> :Pydoc <C-R><C-W><CR>
     au FileType python map <buffer> K k
     au FileType python setl wrap foldtext=MyFoldText()
@@ -31,15 +32,30 @@ aug au_Filetypes "{{{
     " au FileType rst syn spell toplevel
     "
     au FileType cs setl fdm=syntax
-
+    autocmd! BufWritePost *.dart call <SID>reload_dart()
 
     " CTRL P SET PATH
-    au FileType javascript cal <SID>set_path()
+    " au FileType javascript cal <SID>set_path()
 
    " au BufWinEnter * if &buftype == 'terminal' | setlocal winfixheight | endif
 
 aug END "}}}
+function! s:reload_dart() abort
+    if &shell =~? 'fish'
+        sil execute '!kill -SIGUSR1 (pgrep -f "[f]lutter_tool.*run")'
+    else
+        sil execute '!kill -SIGUSR1 $(pgrep -f "[f]lutter_tool.*run")'
+    endif
+endfunction
 
+
+Plug 'habamax/vim-godot'
+aug au_Filetypes_gd "{{{
+    au FileType gdscript setl fdm=expr
+    au FileType gdscript setl fdls=0
+    au Filetype gdscript setl shiftwidth=4 expandtab tabstop=4 softtabstop=4
+	" au FileType gdscript setl foldexpr=getline(v:lnum)=~'^#\\s*--.*--$'
+aug END "}}}
 
 fun! s:check_html() "{{{
     " The html template file place

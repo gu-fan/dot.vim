@@ -5,14 +5,22 @@ Plug 'gu-fan/duonote.vim'
 
 Plug 'scrooloose/nerdtree'
 
+" Plug 'lambdalisue/fern.vim'
+
+
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeShowHidden=1
 let g:NERDTreeShowBookmarks = 0
 let g:NERDTreeWinPos = 'right'
+let g:NERDTreeHijackNetrw=0         
+" netrw 还是有很多问题，双击会返回上级
+" nerd too
+let g:netrw_mousemaps= 0
 let NERDTreeIgnore=['\~$', '.meta$[[file]]']
 
 aug au_NERD
     au!
+    au filetype netrw nmap <buffer> <2-leftmouse> <CR>
     " NERDTREE AUTO REFRESH
     au BufWritePost * 
         \ if type(g:NERDTree.ForCurrentTab()) != 0 |
@@ -23,14 +31,17 @@ aug END
 Plug 'kien/ctrlp.vim'
 " nmap <C-J>  :CtrlPLine<CR>
 let g:ctrlp_custom_ignore =  {
-    \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|dist)$',
-    \ 'file': '\v\.(exe|so|dll|meta|png|jpg|psd|asset|ttf|otf)|main\.js$',
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|dist|.import)$',
+    \ 'file': '\v\.(exe|so|dll|meta|png|jpg|psd|asset|ttf|otf|tres|tscn|import)$',
     \ }
 let g:ctrlp_use_cache = 1
-let g:ctrlp_root_markers=['.git', 'package.json', 'package.vim','.root']
-" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+let g:ctrlp_root_markers=['.git', 'package.json', 'package.vim','.root','.default_env.tres']
+let g:ctrlp_switch_buffer = 'et'
 
+" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*,.DS_Store,default-0.json
+
+" let g:ctrlp_working_path_mode = 'wr'
 fun! V(...)
     CtrlPMRU
     if a:0

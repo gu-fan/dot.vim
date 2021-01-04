@@ -1,5 +1,6 @@
 
 com! Copy let @+ = expand('%:p')|echo 'PATH:'.@+
+com! Pwd let @+ = expand('%:p:h')|echo 'PATH:'.@+
 com! Trail call Trim()
 com! Trim call Trim()
 

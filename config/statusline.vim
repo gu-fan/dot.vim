@@ -10,7 +10,7 @@ function! MyStatusLine()
   return s:GetPaste()
         \. "%4*%{MyStatusGit()}%*"
         \. "%5*%{MyStatusGitChanges()}%*"
-        \. " %{MyStatusTsc()} %f %{MyStatusRunningFrame()} %{MyStatusModifySymbol()}"
+        \. " %{MyStatusTsc()} %{Fname(g:actual_curbuf)} %{MyStatusRunningFrame()} %{MyStatusModifySymbol()}"
         \. " %{MyStatusReadonly()} "
         \. errorMsg
         \. "%="
@@ -32,6 +32,23 @@ endfunction
 fun! Echo()
     return bufnr('%')
 endfun
+" show :p:.
+function! Fname(cur) abort
+
+  " return bufname(a:buf)
+  let fname = bufname(a:cur)
+  " return bufnr(a:cur)
+  " return fname
+  if a:cur == bufnr('%')
+    " return ' yes '
+    " return fnamemodify(fname, ':p:.')
+    return expand('%:p:h:t') . '/' . expand('%:t')
+  else
+    return expand('%:.')
+    " return ' not '
+  endif
+  " return expand('%:p:h')
+endfunction
 
 fun! GetGitDir()
     let full = expand('%:p:h')
@@ -60,8 +77,6 @@ fun! MyStatusFile()
     " return exists("g:actual_curbuf") ? g:actual_curbuf : 'NONE'
     return '%#MyStatusLineTitle#%{GetGitDir()}%*'
 
-
-    retrun 
 
     let full = expand('%:p:h')
     let name = expand('%:t')

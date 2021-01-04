@@ -13,17 +13,26 @@ let g:airline_powerline_fonts=1
 let g:airline_theme='base16_grayscale'
 
 
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ }
+
 
 if !exists('s:ui_loaded')
     let s:ui_loaded = 1
     if filereadable(galaxy_path) 
-        exe "source " .galaxy_path
-        colorscheme galaxy
-        set t_Co=256                   " 256 colors for terminal
+        " exe "source " .galaxy_path
+        " colorscheme galaxy
+        " set t_Co=256                   " 256 colors for terminal
     else
         set background=dark            " set a dark background
-        colorscheme slate
+        " colorscheme slate
+        " colorscheme slate
     endif
+    " set background=light
+    set background=dark
+    " colorscheme solarized8_low
+    colorscheme sialoquent
 
 
     if g:_v.is_windows
@@ -34,7 +43,7 @@ if !exists('s:ui_loaded')
         set guifont=Droid\ Sans\ Mono\ for\ Powerline:h16
         " set guifontwide=兰亭黑-简\ 纤黑:h16
         " http://wenq.org/wqy2/index.cgi?Download#MicroHei_Beta
-        set guifontwide=文泉驿等宽微米黑:h16
+        " set guifontwide=文泉驿等宽微米黑:h16
     elseif g:_v.is_unix
         set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 14,Fixed\ 14
         set guifontwide=Microsoft\ Yahei\ 14,WenQuanYi\ Zen\ Hei\ 14

@@ -7,10 +7,7 @@ scriptencoding utf-8
 language messages en_US.utf-8
 
 
-set sua+=.js,.css,.html,index.js,/index.js,index.vim,.vim
-set path+=~/.vim/plugged/,~/.dot.vim/
-
-
+set sua+=.js,.css,.html,.vim,.vue,.styl
 
 set nopaste
 set pastetoggle=<F2>

@@ -65,7 +65,7 @@ Require 'package/mapping'
 Require 'package/file'
 Require 'package/git'
 
-Plug 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 
 
 call plug#end()

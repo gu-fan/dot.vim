@@ -10,6 +10,9 @@ let g:riv_projects = [proj1, proj2, proj3, proj4]
 " XXX: This should be set as a project option.
 let g:riv_todo_datestamp = 0
 let g:riv_file_link_style = 2
+let g:riv_file_link_ext ="vim,py,rb,js,css,vue,yml,json"
+let g:riv_web_browser = "google chrome"
+let g:riv_todo_levels = " ,x"
 
 Plug 'rykka/autotype.vim'
 " Plug 'rykka/os.vim'

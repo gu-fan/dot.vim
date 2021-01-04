@@ -2,7 +2,8 @@
 " Folding
 " set foldtext=MyFoldText()
 " set foldenable 
-set foldmethod=marker "{{{
+" set foldmethod=marker "{{{
+set foldmethod=syntax "{{{
 set foldcolumn=0
 set foldlevel=0 foldlevelstart=1
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo "}}}

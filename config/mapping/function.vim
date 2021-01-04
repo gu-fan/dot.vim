@@ -94,6 +94,7 @@ vno   <F3>   y:Ag <C-R>"<CR>
 
 "{{{3 F4 Folder
 nno <silent> <F4> :call <SID>toggle_nerdfind()<CR>
+" nno <silent> <F4> :Fern . -drawer -toggle -reveal=% -stay<CR>
 nno <silent> <C-T> :call <SID>toggle_nerdfind()<CR>
 nno <silent> <F5> :call <SID>exe("n")<CR>
 vno <silent> <F5> :call <SID>exe("v")<CR>
