@@ -21,14 +21,11 @@ exec "so ".  g:path.dot. "package.vim"
 
 " the navigation as autojump in vim is still a problem
 " maybe ctrlp+mru ? 
-" 
 "
 " the terminal integration need buffer specific command
 " will greatly improve workflow
 "
 " rgba(  4, 32,124,0.5)
-"
-"
 "
 " others
 "
@@ -39,6 +36,11 @@ exec "so ".  g:path.dot. "package.vim"
 " ~/.config/fish/fish.config
 " ~/.config/omf/init.fish
 set mmp=100000
-cd /Users/gu_fan/Desktop/Apps/DaXie/uni-app
+" cd /Users/gu_fan/nuts/wiki_new
 set bo=all
 " let $SSH_ASKPASS = simplify($VIM . '/../../MacOS') . '/macvim-askpass'
+"
+" :h terminal
+let g:terminal_ansi_colors = 
+            \['#616161', '#f08978', '#c3f884', '#fefdc8', '#afd4fa', '#f295f7', '#d0d1fa', '#f1f1f1'
+            \,'#8e8e8e', '#f7c6bf', '#ddfbc0', '#fefdd9', '#c8e2fc', '#f5b5f9', '#e5e6fc', '#fffeff']

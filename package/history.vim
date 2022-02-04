@@ -5,6 +5,7 @@ Plug 'sjl/gundo.vim'
 Plug 'rykka/lastbuf.vim'
 
 
+" use startify session instead
 " save/load last workspace
 Plug 'tpope/vim-obsession'
 

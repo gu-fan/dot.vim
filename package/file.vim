@@ -1,12 +1,16 @@
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
+" popup window for search word and preview real time
+noremap <leader>k :Ag<CR>
+noremap <c-k> :Ag<CR>
 
-Plug 'gu-fan/duonote.vim'
+" Plug 'gu-fan/duonote.vim'
 
 Plug 'scrooloose/nerdtree'
 
 " Plug 'lambdalisue/fern.vim'
-
 
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeShowHidden=1
